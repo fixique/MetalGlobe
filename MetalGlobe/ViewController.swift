@@ -7,19 +7,38 @@
 //
 
 import UIKit
+import Metal
+
+class MetalHostingView: UIView {
+    override class var layerClass: Swift.AnyClass {
+        return CAMetalLayer.self
+    }
+}
 
 class ViewController: UIViewController {
 
+    var metalLayer: CAMetalLayer! = nil
+    let device = MTLCreateSystemDefaultDevice()!
+    var pipeline: MTLRenderPipelineState! = nil
+    var commadQueue: MTLCommandQueue! = nil
+    
+    var timer: CADisplayLink! = nil
+    var userToggle: Bool = false
+    
+    override func loadView() {
+        self.view = MetalHostingView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        metalLayer = view.layer as! CAMetalLayer
+        
+        view.backgroundColor = UIColor.white
+        
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 
 }
 

@@ -12,6 +12,10 @@
 		4D739DCA1E958FC9003D39F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DC81E958FC9003D39F4 /* Main.storyboard */; };
 		4D739DCC1E958FC9003D39F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCB1E958FC9003D39F4 /* Assets.xcassets */; };
 		4D739DCF1E958FC9003D39F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCD1E958FC9003D39F4 /* LaunchScreen.storyboard */; };
+		4D739DD81E959099003D39F4 /* sphere.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DD71E959099003D39F4 /* sphere.metal */; };
+		4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDB1E9595E5003D39F4 /* geometric.swift */; };
+		4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */; };
+		4D739DE01E959D47003D39F4 /* sphereDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDF1E959D47003D39F4 /* sphereDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		4D739DCB1E958FC9003D39F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D739DCE1E958FC9003D39F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D739DD01E958FC9003D39F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D739DD71E959099003D39F4 /* sphere.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = sphere.metal; sourceTree = "<group>"; };
+		4D739DDB1E9595E5003D39F4 /* geometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = geometric.swift; sourceTree = "<group>"; };
+		4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereGenerator.swift; sourceTree = "<group>"; };
+		4D739DDF1E959D47003D39F4 /* sphereDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sphereDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,9 @@
 		4D739DC31E958FC9003D39F4 /* MetalGlobe */ = {
 			isa = PBXGroup;
 			children = (
+				4D739DDA1E9595A4003D39F4 /* Unit */,
+				4D739DD91E9594A3003D39F4 /* DemoClasses */,
+				4D739DD61E95906C003D39F4 /* Textured */,
 				4D739DC41E958FC9003D39F4 /* AppDelegate.swift */,
 				4D739DC61E958FC9003D39F4 /* ViewController.swift */,
 				4D739DC81E958FC9003D39F4 /* Main.storyboard */,
@@ -62,6 +73,31 @@
 				4D739DD01E958FC9003D39F4 /* Info.plist */,
 			);
 			path = MetalGlobe;
+			sourceTree = "<group>";
+		};
+		4D739DD61E95906C003D39F4 /* Textured */ = {
+			isa = PBXGroup;
+			children = (
+				4D739DD71E959099003D39F4 /* sphere.metal */,
+			);
+			name = Textured;
+			sourceTree = "<group>";
+		};
+		4D739DD91E9594A3003D39F4 /* DemoClasses */ = {
+			isa = PBXGroup;
+			children = (
+				4D739DDF1E959D47003D39F4 /* sphereDemo.swift */,
+			);
+			name = DemoClasses;
+			sourceTree = "<group>";
+		};
+		4D739DDA1E9595A4003D39F4 /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				4D739DDB1E9595E5003D39F4 /* geometric.swift */,
+				4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */,
+			);
+			name = Unit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D739DC71E958FC9003D39F4 /* ViewController.swift in Sources */,
+				4D739DE01E959D47003D39F4 /* sphereDemo.swift in Sources */,
+				4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */,
+				4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */,
+				4D739DD81E959099003D39F4 /* sphere.metal in Sources */,
 				4D739DC51E958FC9003D39F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
