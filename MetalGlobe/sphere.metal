@@ -9,7 +9,8 @@
 #include <metal_stdlib>
 using namespace metal;
 
-constant float3 lightDirection(0,55735, 0.57735);
+
+constant float3 lightDirection(0.57735, 0.57735, 0.57735);
 
 struct TexturedInVertex
 {
@@ -24,7 +25,6 @@ struct TexturedColoredOutVertex
     float3 normal;
 };
 
-
 struct Uniforms
 {
     float4x4 projectionMatrix;
@@ -35,7 +35,6 @@ vertex TexturedColoredOutVertex vertex_sphere(device TexturedInVertex *vert [[bu
                                                 constant Uniforms &uniforms [[buffer(1)]],
                                                 uint vid [[vertex_id]])
 {
-    
     float4x4 MV = uniforms.modelViewMatrix;
     float3x3 normalMatrix(MV[0].xyz, MV[1].xyz, MV[2].xyz);
     float4 modelNormal = vert[vid].normal;
@@ -45,11 +44,10 @@ vertex TexturedColoredOutVertex vertex_sphere(device TexturedInVertex *vert [[bu
     outVertex.normal = normalMatrix * modelNormal.xyz;
     
     return outVertex;
-    
 }
 
 fragment half4 fragment_sphere(TexturedColoredOutVertex vert [[stage_in]])
 {
-    float diffuseIntesity= saturate(dot(normalize(vert.normal), lightDirection));
-    return half4(diffuseIntesity, diffuseIntesity, diffuseIntesity, 1);
+    float diffuseIntensity = saturate(dot(normalize(vert.normal), lightDirection));
+    return half4(diffuseIntensity, diffuseIntensity, diffuseIntensity, 1);
 }

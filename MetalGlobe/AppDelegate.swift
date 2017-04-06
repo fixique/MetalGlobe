@@ -8,7 +8,7 @@
 
 import UIKit
 
-let DemoNumber = 0
+let DemoNumber = 1
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         switch DemoNumber {
-            case 0: break
-            
-            default:
-                break
+        case 0:
+            rootViewController = sphereDemo()
+        case 1:
+            rootViewController = globeDemo()
+        default:
+            break
         }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        rootViewController.view.frame = window!.bounds
+        window!.rootViewController = rootViewController
+        window!.makeKeyAndVisible()
         
         return true
     }
