@@ -72,25 +72,32 @@ final class SphereViewController: MainSceneViewController {
 
     override func draw() {
         guard let drawable = metalLayer?.nextDrawable(),
-            let drawableSize = metalLayer?.drawableSize,
-            let indexBuffer = indexBuffer,
-            let pipeline = pipeline else { return }
+            let drawableSize = metalLayer?.drawableSize
+            else { return }
+
         let yAxis = Vector4(x: 0, y: -1, z: 0, w: 0)
         var modelViewMatrix = Matrix4x4.rotationAboutAxis(yAxis, byAngle: rotationAngle)
-
         modelViewMatrix.W.z = -5
-
         let aspect = Float32(drawableSize.width) / Float32(drawableSize.height)
-
         let projectionMatrix = Matrix4x4.perspeciveProjection(aspect, fieldOfViewY: 60, near: 0.1, far: 100.0)
-
         let matrices = [projectionMatrix, modelViewMatrix]
         memcpy(uniformBuffer?.contents(), matrices, MemoryLayout<Matrix4x4>.size * 2)
-
         let commandBuffer = commandQueue?.makeCommandBuffer()
+        configureCommandEncoder(texture: drawable.texture, commandBuffer: commandBuffer)
+        commandBuffer?.present(drawable)
+        commandBuffer?.commit()
 
+        rotationAngle += 0.01
+    }
+}
+
+// MARK: - Help methods
+
+private extension SphereViewController {
+
+    func getRenderPassDescriptor(texture: MTLTexture) -> MTLRenderPassDescriptor {
         let passDescriptor = MTLRenderPassDescriptor()
-        passDescriptor.colorAttachments[0].texture = drawable.texture
+        passDescriptor.colorAttachments[0].texture = texture
         passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.5, 0.5, 0.5, 1)
         passDescriptor.colorAttachments[0].loadAction = .clear
         passDescriptor.colorAttachments[0].storeAction = .store
@@ -99,9 +106,14 @@ final class SphereViewController: MainSceneViewController {
         passDescriptor.depthAttachment.clearDepth = 1
         passDescriptor.depthAttachment.loadAction = .clear
         passDescriptor.depthAttachment.storeAction = .dontCare
+        return passDescriptor
+    }
+
+    func configureCommandEncoder(texture: MTLTexture, commandBuffer: MTLCommandBuffer?) {
+        guard let indexBuffer = indexBuffer, let pipeline = pipeline else { return }
 
         let indexCount = indexBuffer.length / MemoryLayout<UInt16>.size
-        let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: passDescriptor)
+        let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: getRenderPassDescriptor(texture: texture))
 
         if userToggle {
             commandEncoder?.setTriangleFillMode(.lines)
@@ -114,15 +126,10 @@ final class SphereViewController: MainSceneViewController {
         commandEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         commandEncoder?.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
         commandEncoder?.drawIndexedPrimitives(type: .triangle,
-                                             indexCount: indexCount,
-                                             indexType: .uint16,
-                                             indexBuffer: indexBuffer,
-                                             indexBufferOffset: 0)
+                                              indexCount: indexCount,
+                                              indexType: .uint16,
+                                              indexBuffer: indexBuffer,
+                                              indexBufferOffset: 0)
         commandEncoder?.endEncoding()
-
-        commandBuffer?.present(drawable)
-        commandBuffer?.commit()
-
-        rotationAngle += 0.01
     }
 }
