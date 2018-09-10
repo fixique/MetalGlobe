@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4D3774F81E95AF5400FA9083 /* globe.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4D3774F71E95AF5400FA9083 /* globe.metal */; };
 		4D739DC51E958FC9003D39F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DC41E958FC9003D39F4 /* AppDelegate.swift */; };
-		4D739DC71E958FC9003D39F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DC61E958FC9003D39F4 /* ViewController.swift */; };
 		4D739DCA1E958FC9003D39F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DC81E958FC9003D39F4 /* Main.storyboard */; };
 		4D739DCC1E958FC9003D39F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCB1E958FC9003D39F4 /* Assets.xcassets */; };
 		4D739DCF1E958FC9003D39F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCD1E958FC9003D39F4 /* LaunchScreen.storyboard */; };
@@ -26,7 +25,6 @@
 		4D3774F71E95AF5400FA9083 /* globe.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = globe.metal; sourceTree = "<group>"; };
 		4D739DC11E958FC9003D39F4 /* MetalGlobe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGlobe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D739DC41E958FC9003D39F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4D739DC61E958FC9003D39F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4D739DC91E958FC9003D39F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4D739DCB1E958FC9003D39F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D739DCE1E958FC9003D39F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				4D739DC81E958FC9003D39F4 /* Main.storyboard */,
-				4D739DC61E958FC9003D39F4 /* ViewController.swift */,
 				80CFDA67214688730024D864 /* MainSceneViewController.swift */,
 			);
 			path = Screens;
@@ -134,22 +131,6 @@
 				4D739DCB1E958FC9003D39F4 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		80CFDA69214688BA0024D864 /* ReusableLayers */ = {
-			isa = PBXGroup;
-			children = (
-				80CFDA6C214688D50024D864 /* MetalHostingView */,
-			);
-			path = ReusableLayers;
-			sourceTree = "<group>";
-		};
-		80CFDA6C214688D50024D864 /* MetalHostingView */ = {
-			isa = PBXGroup;
-			children = (
-				80CFDA6A214688D00024D864 /* MetalHostingView.swift */,
-			);
-			path = MetalHostingView;
 			sourceTree = "<group>";
 		};
 		80CFDA69214688BA0024D864 /* ReusableLayers */ = {
@@ -241,7 +222,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D739DC71E958FC9003D39F4 /* ViewController.swift in Sources */,
 				4D3774F81E95AF5400FA9083 /* globe.metal in Sources */,
 				4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */,
 				80CFDA6F2146A0B00024D864 /* GlobeViewController.swift in Sources */,
