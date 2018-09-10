@@ -8,7 +8,7 @@
 
 import UIKit
 
-let DemoNumber = 1
+let DemoNumber = 0
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

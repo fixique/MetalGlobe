@@ -14,9 +14,9 @@ constant float3 lightDirection(0.57735, 0.57735, 0.57735);
 
 struct TexturedInVertex
 {
-    packed_float4 position [[attribute(0)]];
-    packed_float4 normal [[attribute(1)]];
-    packed_float2 texCoords [[attribute(2)]];
+    packed_float4 position;
+    packed_float4 normal;
+    packed_float2 texCoords;
 };
 
 struct TexturedColoredOutVertex
