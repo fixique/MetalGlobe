@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Private properties
 
-    private var demoType: DemoType = .sphere
+    private var demoType: DemoType = .globe
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setupDemo()

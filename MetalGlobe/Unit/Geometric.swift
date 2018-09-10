@@ -1,5 +1,5 @@
 //
-//  geometric.swift
+//  Geometric.swift
 //  MetalGlobe
 //
 //  Created by Vlad Krupenko on 06.04.17.
@@ -94,19 +94,3 @@ struct Matrix4x4 {
         return mat
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

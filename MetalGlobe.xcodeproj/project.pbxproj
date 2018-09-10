@@ -13,7 +13,7 @@
 		4D739DCC1E958FC9003D39F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCB1E958FC9003D39F4 /* Assets.xcassets */; };
 		4D739DCF1E958FC9003D39F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DCD1E958FC9003D39F4 /* LaunchScreen.storyboard */; };
 		4D739DD81E959099003D39F4 /* sphere.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DD71E959099003D39F4 /* sphere.metal */; };
-		4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDB1E9595E5003D39F4 /* geometric.swift */; };
+		4D739DDC1E9595E5003D39F4 /* Geometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDB1E9595E5003D39F4 /* Geometric.swift */; };
 		4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */; };
 		80CFDA63214686BA0024D864 /* SphereViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA62214686BA0024D864 /* SphereViewController.swift */; };
 		80CFDA68214688730024D864 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA67214688730024D864 /* MainSceneViewController.swift */; };
@@ -30,7 +30,7 @@
 		4D739DCE1E958FC9003D39F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D739DD01E958FC9003D39F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D739DD71E959099003D39F4 /* sphere.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = sphere.metal; sourceTree = "<group>"; };
-		4D739DDB1E9595E5003D39F4 /* geometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = geometric.swift; sourceTree = "<group>"; };
+		4D739DDB1E9595E5003D39F4 /* Geometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometric.swift; sourceTree = "<group>"; };
 		4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereGenerator.swift; sourceTree = "<group>"; };
 		80CFDA62214686BA0024D864 /* SphereViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereViewController.swift; sourceTree = "<group>"; };
 		80CFDA67214688730024D864 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +70,6 @@
 			children = (
 				80CFDA642146879A0024D864 /* Application */,
 				80CFDA61214686660024D864 /* Textures */,
-				80CFDA60214686570024D864 /* DemoClasses */,
 				80CFDA5F214686220024D864 /* Unit */,
 				80CFDA65214687DA0024D864 /* Screens */,
 				80CFDA69214688BA0024D864 /* ReusableLayers */,
@@ -82,19 +81,10 @@
 		80CFDA5F214686220024D864 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
-				4D739DDB1E9595E5003D39F4 /* geometric.swift */,
+				4D739DDB1E9595E5003D39F4 /* Geometric.swift */,
 				4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */,
 			);
 			path = Unit;
-			sourceTree = "<group>";
-		};
-		80CFDA60214686570024D864 /* DemoClasses */ = {
-			isa = PBXGroup;
-			children = (
-				80CFDA62214686BA0024D864 /* SphereViewController.swift */,
-				80CFDA6E2146A0B00024D864 /* GlobeViewController.swift */,
-			);
-			path = DemoClasses;
 			sourceTree = "<group>";
 		};
 		80CFDA61214686660024D864 /* Textures */ = {
@@ -119,8 +109,9 @@
 		80CFDA65214687DA0024D864 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				4D739DC81E958FC9003D39F4 /* Main.storyboard */,
-				80CFDA67214688730024D864 /* MainSceneViewController.swift */,
+				80CFDA732146F3110024D864 /* GlobeDemo */,
+				80CFDA722146F2FF0024D864 /* SphereDemo */,
+				80CFDA712146F2F20024D864 /* MainScene */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -147,6 +138,31 @@
 				80CFDA6A214688D00024D864 /* MetalHostingView.swift */,
 			);
 			path = MetalHostingView;
+			sourceTree = "<group>";
+		};
+		80CFDA712146F2F20024D864 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				4D739DC81E958FC9003D39F4 /* Main.storyboard */,
+				80CFDA67214688730024D864 /* MainSceneViewController.swift */,
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		80CFDA722146F2FF0024D864 /* SphereDemo */ = {
+			isa = PBXGroup;
+			children = (
+				80CFDA62214686BA0024D864 /* SphereViewController.swift */,
+			);
+			path = SphereDemo;
+			sourceTree = "<group>";
+		};
+		80CFDA732146F3110024D864 /* GlobeDemo */ = {
+			isa = PBXGroup;
+			children = (
+				80CFDA6E2146A0B00024D864 /* GlobeViewController.swift */,
+			);
+			path = GlobeDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D3774F81E95AF5400FA9083 /* globe.metal in Sources */,
-				4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */,
+				4D739DDC1E9595E5003D39F4 /* Geometric.swift in Sources */,
 				80CFDA6F2146A0B00024D864 /* GlobeViewController.swift in Sources */,
 				80CFDA6B214688D00024D864 /* MetalHostingView.swift in Sources */,
 				4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */,
