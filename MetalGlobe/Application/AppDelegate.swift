@@ -8,34 +8,44 @@
 
 import UIKit
 
-let DemoNumber = 0
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: - Enums
+
+    private enum DemoType: Int {
+        case sphere = 0
+        case globe
+    }
+
+    // MARK: - Internal properties
+
     var window: UIWindow?
-    var rootViewController: UIViewController!
+
+    // MARK: - Private properties
+
+    private var demoType: DemoType = .sphere
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        setupDemo()
+        window?.makeKeyAndVisible()
 
-        switch DemoNumber {
-        case 0:
-            rootViewController = SphereViewController()
-        case 1:
-            rootViewController = GlobeViewController()
-        default:
-            break
-        }
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        rootViewController.view.frame = window!.bounds
-        window!.rootViewController = rootViewController
-        window!.makeKeyAndVisible()
-        
         return true
     }
 
-    
-
 }
 
+// MARK: - Configure
+
+private extension AppDelegate {
+
+    func setupDemo() {
+        switch demoType {
+        case .sphere:
+            window?.rootViewController = SphereViewController()
+        case .globe:
+            window?.rootViewController = GlobeViewController()
+        }
+    }
+
+}
