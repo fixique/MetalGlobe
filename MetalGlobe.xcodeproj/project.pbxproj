@@ -152,6 +152,22 @@
 			path = MetalHostingView;
 			sourceTree = "<group>";
 		};
+		80CFDA69214688BA0024D864 /* ReusableLayers */ = {
+			isa = PBXGroup;
+			children = (
+				80CFDA6C214688D50024D864 /* MetalHostingView */,
+			);
+			path = ReusableLayers;
+			sourceTree = "<group>";
+		};
+		80CFDA6C214688D50024D864 /* MetalHostingView */ = {
+			isa = PBXGroup;
+			children = (
+				80CFDA6A214688D00024D864 /* MetalHostingView.swift */,
+			);
+			path = MetalHostingView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
