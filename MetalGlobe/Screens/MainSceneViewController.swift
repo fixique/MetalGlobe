@@ -11,15 +11,18 @@ import Metal
 
 class MainSceneViewController: UIViewController {
 
+    // MARK: - Internal Properties
+
+    let device = MTLCreateSystemDefaultDevice()
+    var pipeline: MTLRenderPipelineState?
+    var commandQueue: MTLCommandQueue?
+    var metalLayer: CAMetalLayer?
+
+    var userToggle: Bool = false
+
     // MARK: - Private Properties
 
-    private let device = MTLCreateSystemDefaultDevice()
-    private var metalLayer: CAMetalLayer?
-    private var pipeline: MTLRenderPipelineState?
-    private var commandQueue: MTLCommandQueue?
-
     private var timer: CADisplayLink?
-    private var userToggle: Bool = false
 
     // MARK: - UIViewController
 
@@ -64,6 +67,20 @@ class MainSceneViewController: UIViewController {
         preconditionFailure("This method must be overriden by the subclass")
     }
 
+    func resize() {
+        guard let window = view.window else {
+            return
+        }
+
+        let scale = window.screen.nativeScale
+        let viewSize = window.bounds.size
+        let layerSize = viewSize
+
+        view.contentScaleFactor = scale
+        metalLayer?.drawableSize = CGSize(width: layerSize.width * scale,
+                                          height: layerSize.height * scale)
+    }
+
 }
 
 // MARK: - Configure Scene
@@ -79,20 +96,6 @@ private extension MainSceneViewController {
         metalLayer?.device = device
         metalLayer?.pixelFormat = .bgra8Unorm
         commandQueue = device?.makeCommandQueue()
-    }
-
-    func resize() {
-        guard let window = view.window else {
-            return
-        }
-
-        let scale = window.screen.nativeScale
-        let viewSize = window.bounds.size
-        let layerSize = viewSize
-
-        view.contentScaleFactor = scale
-        metalLayer?.drawableSize = CGSize(width: layerSize.width * scale,
-                                          height: layerSize.height * scale)
     }
 
     func configureTapGesture() {

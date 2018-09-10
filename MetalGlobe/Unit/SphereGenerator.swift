@@ -10,7 +10,7 @@ import Metal
 
 struct SphereGenerator {
     static func sphereWithRadius(_ radius: Float32, stacks: Int, slices: Int, device: MTLDevice) -> (MTLBuffer, MTLBuffer) {
-        let pi = Float32(M_PI)
+        let pi = Float32(Float32.pi)
         let twoPi = pi * 2
         let deltaPhi = pi / Float32(stacks)
         let deltaTheta = twoPi / Float32(slices)
@@ -18,7 +18,7 @@ struct SphereGenerator {
         var vertices = [Vertex]()
         var indices = [UInt16]()
         
-        var phi = Float32(-M_PI / 2)
+        var phi = Float32(-Float32.pi / 2)
         for _ in 0...stacks {
             
             var theta:Float32 = 0
@@ -65,7 +65,7 @@ struct SphereGenerator {
         
         let indexBuffer = device.makeBuffer(bytes: indices, length:MemoryLayout<UInt16>.size * indices.count, options:[])
         
-        return (vertexBuffer, indexBuffer)
+        return (vertexBuffer!, indexBuffer!)
     }
 }
 
