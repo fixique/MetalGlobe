@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D3774F81E95AF5400FA9083 /* globe.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4D3774F71E95AF5400FA9083 /* globe.metal */; };
-		4D3774FA1E95AF7200FA9083 /* globeDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3774F91E95AF7200FA9083 /* globeDemo.swift */; };
 		4D739DC51E958FC9003D39F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DC41E958FC9003D39F4 /* AppDelegate.swift */; };
 		4D739DC71E958FC9003D39F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DC61E958FC9003D39F4 /* ViewController.swift */; };
 		4D739DCA1E958FC9003D39F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D739DC81E958FC9003D39F4 /* Main.storyboard */; };
@@ -17,15 +16,14 @@
 		4D739DD81E959099003D39F4 /* sphere.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DD71E959099003D39F4 /* sphere.metal */; };
 		4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDB1E9595E5003D39F4 /* geometric.swift */; };
 		4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */; };
-		4D739DE01E959D47003D39F4 /* sphereDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D739DDF1E959D47003D39F4 /* sphereDemo.swift */; };
 		80CFDA63214686BA0024D864 /* SphereViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA62214686BA0024D864 /* SphereViewController.swift */; };
 		80CFDA68214688730024D864 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA67214688730024D864 /* MainSceneViewController.swift */; };
 		80CFDA6B214688D00024D864 /* MetalHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA6A214688D00024D864 /* MetalHostingView.swift */; };
+		80CFDA6F2146A0B00024D864 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFDA6E2146A0B00024D864 /* GlobeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4D3774F71E95AF5400FA9083 /* globe.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = globe.metal; sourceTree = "<group>"; };
-		4D3774F91E95AF7200FA9083 /* globeDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globeDemo.swift; sourceTree = "<group>"; };
 		4D739DC11E958FC9003D39F4 /* MetalGlobe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGlobe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D739DC41E958FC9003D39F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D739DC61E958FC9003D39F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,10 +34,10 @@
 		4D739DD71E959099003D39F4 /* sphere.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = sphere.metal; sourceTree = "<group>"; };
 		4D739DDB1E9595E5003D39F4 /* geometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = geometric.swift; sourceTree = "<group>"; };
 		4D739DDD1E9599D9003D39F4 /* SphereGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereGenerator.swift; sourceTree = "<group>"; };
-		4D739DDF1E959D47003D39F4 /* sphereDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sphereDemo.swift; sourceTree = "<group>"; };
 		80CFDA62214686BA0024D864 /* SphereViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereViewController.swift; sourceTree = "<group>"; };
 		80CFDA67214688730024D864 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		80CFDA6A214688D00024D864 /* MetalHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalHostingView.swift; sourceTree = "<group>"; };
+		80CFDA6E2146A0B00024D864 /* GlobeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +93,8 @@
 		80CFDA60214686570024D864 /* DemoClasses */ = {
 			isa = PBXGroup;
 			children = (
-				4D739DDF1E959D47003D39F4 /* sphereDemo.swift */,
-				4D3774F91E95AF7200FA9083 /* globeDemo.swift */,
 				80CFDA62214686BA0024D864 /* SphereViewController.swift */,
+				80CFDA6E2146A0B00024D864 /* GlobeViewController.swift */,
 			);
 			path = DemoClasses;
 			sourceTree = "<group>";
@@ -228,11 +225,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D3774FA1E95AF7200FA9083 /* globeDemo.swift in Sources */,
 				4D739DC71E958FC9003D39F4 /* ViewController.swift in Sources */,
-				4D739DE01E959D47003D39F4 /* sphereDemo.swift in Sources */,
 				4D3774F81E95AF5400FA9083 /* globe.metal in Sources */,
 				4D739DDC1E9595E5003D39F4 /* geometric.swift in Sources */,
+				80CFDA6F2146A0B00024D864 /* GlobeViewController.swift in Sources */,
 				80CFDA6B214688D00024D864 /* MetalHostingView.swift in Sources */,
 				4D739DDE1E9599D9003D39F4 /* SphereGenerator.swift in Sources */,
 				80CFDA68214688730024D864 /* MainSceneViewController.swift in Sources */,

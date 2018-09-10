@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         switch DemoNumber {
         case 0:
-            rootViewController = SphereViewController()//sphereDemo()
+            rootViewController = SphereViewController()
         case 1:
-            rootViewController = SphereViewController()//globeDemo()
+            rootViewController = GlobeViewController()
         default:
             break
         }
