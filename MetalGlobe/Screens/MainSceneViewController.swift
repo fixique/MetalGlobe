@@ -122,7 +122,8 @@ private extension MainSceneViewController {
     @objc
     func redraw() {
         autoreleasepool { [weak self] in
-            self?.redraw()
+            guard let `self` = self else { return }
+            self.draw()
         }
     }
 

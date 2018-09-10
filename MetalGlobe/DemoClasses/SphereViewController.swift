@@ -67,6 +67,8 @@ final class SphereViewController: MainSceneViewController {
                                                                               width: Int(layerSize.width),
                                                                               height: Int(layerSize.height),
                                                                               mipmapped: false)
+        depthTextureDescriptor.usage = MTLTextureUsage.renderTarget
+
         depthTexture = device?.makeTexture(descriptor: depthTextureDescriptor)
     }
 
