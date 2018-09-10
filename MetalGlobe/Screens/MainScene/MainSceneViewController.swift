@@ -81,6 +81,17 @@ class MainSceneViewController: UIViewController {
                                           height: layerSize.height * scale)
     }
 
+    func getVertexDescriptor() -> MTLVertexDescriptor {
+        return makeVertexDescriptor()
+    }
+
+    func makeDepthStencilState() -> MTLDepthStencilState? {
+        let depthStencilDescriptor = MTLDepthStencilDescriptor()
+        depthStencilDescriptor.depthCompareFunction = .less
+        depthStencilDescriptor.isDepthWriteEnabled = true
+        return device?.makeDepthStencilState(descriptor: depthStencilDescriptor)
+    }
+
 }
 
 // MARK: - Configure Scene
@@ -106,6 +117,31 @@ private extension MainSceneViewController {
     func startDisplayTimer() {
         timer = CADisplayLink(target: self, selector: #selector(redraw))
         timer?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+
+}
+
+// MARK: - Private methods
+
+private extension MainSceneViewController {
+
+    func makeVertexDescriptor() -> MTLVertexDescriptor {
+        let vertexDescriptor = MTLVertexDescriptor()
+        vertexDescriptor.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].format = .float4
+        vertexDescriptor.attributes[0].bufferIndex = 0
+
+        vertexDescriptor.attributes[1].offset = MemoryLayout<Float32>.size * 4
+        vertexDescriptor.attributes[1].format = .float4
+        vertexDescriptor.attributes[1].bufferIndex = 0
+
+        vertexDescriptor.attributes[2].offset = MemoryLayout<Float32>.size * 8
+        vertexDescriptor.attributes[2].format = .float2
+        vertexDescriptor.attributes[2].bufferIndex = 0
+
+        vertexDescriptor.layouts[0].stepFunction = .perVertex
+        vertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.size
+        return vertexDescriptor
     }
 
 }

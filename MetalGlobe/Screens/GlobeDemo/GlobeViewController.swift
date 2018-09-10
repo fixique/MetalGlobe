@@ -20,7 +20,6 @@ final class GlobeViewController: MainSceneViewController {
 
     // MARK: - Private properties
 
-    private var depthStencilState: MTLDepthStencilState?
     private var vertexBuffer: MTLBuffer?
     private var indexBuffer: MTLBuffer?
     private var uniformBuffer: MTLBuffer?
@@ -36,7 +35,7 @@ final class GlobeViewController: MainSceneViewController {
         let library = device?.makeDefaultLibrary()
         let vertexFunction = library?.makeFunction(name: Constants.vertexGlobeName)
         let fragmentFunction = library?.makeFunction(name: Constants.fragmentGlobeName)
-        let vertexDescriptor = makeVertexDescriptor()
+        let vertexDescriptor = getVertexDescriptor()
 
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
@@ -50,7 +49,6 @@ final class GlobeViewController: MainSceneViewController {
             return
         }
         pipeline = internalPipeline
-        makeDepthStencilDescriptor()
         commandQueue = device?.makeCommandQueue()
         makeSemplerDescriptor()
     }
@@ -112,7 +110,7 @@ final class GlobeViewController: MainSceneViewController {
             commandEncoder?.setTriangleFillMode(.lines)
         }
         commandEncoder?.setRenderPipelineState(pipeline)
-        commandEncoder?.setDepthStencilState(depthStencilState)
+        commandEncoder?.setDepthStencilState(makeDepthStencilState())
         commandEncoder?.setFrontFacing(.counterClockwise)
         commandEncoder?.setCullMode(.back)
         commandEncoder?.setVertexBuffer(vertexBuffer, offset:0, index:0)
@@ -181,32 +179,6 @@ private extension GlobeViewController {
         free(rawData)
 
         return texture
-    }
-
-    func makeVertexDescriptor() -> MTLVertexDescriptor {
-        let vertexDescriptor = MTLVertexDescriptor()
-        vertexDescriptor.attributes[0].offset = 0
-        vertexDescriptor.attributes[0].format = .float4
-        vertexDescriptor.attributes[0].bufferIndex = 0
-
-        vertexDescriptor.attributes[1].offset = MemoryLayout<Float32>.size * 4
-        vertexDescriptor.attributes[1].format = .float4
-        vertexDescriptor.attributes[1].bufferIndex = 0
-
-        vertexDescriptor.attributes[2].offset = MemoryLayout<Float32>.size * 8
-        vertexDescriptor.attributes[2].format = .float2
-        vertexDescriptor.attributes[2].bufferIndex = 0
-
-        vertexDescriptor.layouts[0].stepFunction = .perVertex
-        vertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.size
-        return vertexDescriptor
-    }
-
-    func makeDepthStencilDescriptor() {
-        let depthStencilDescriptor = MTLDepthStencilDescriptor()
-        depthStencilDescriptor.depthCompareFunction = .less
-        depthStencilDescriptor.isDepthWriteEnabled = true
-        depthStencilState = device?.makeDepthStencilState(descriptor: depthStencilDescriptor)
     }
 
     func makeSemplerDescriptor() {
