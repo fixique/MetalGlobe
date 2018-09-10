@@ -68,4 +68,3 @@ struct SphereGenerator {
         return (vertexBuffer!, indexBuffer!)
     }
 }
-
