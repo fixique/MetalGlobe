@@ -9,12 +9,6 @@
 import UIKit
 import Metal
 
-class MetalHostingView: UIView {
-    override class var layerClass: Swift.AnyClass {
-        return CAMetalLayer.self
-    }
-}
-
 class ViewController: UIViewController {
 
     var metalLayer: CAMetalLayer! = nil
