@@ -1,3 +1,4 @@
+[![Platform](https://img.shields.io/badge/Platform-iOS-red.svg)](https://developer.apple.com/iphone/)
 [![Swift Version](https://img.shields.io/badge/Swift-4.1-orange.svg)](https://developer.apple.com/swift/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1a491785dc744cd90f2/maintainability)](https://codeclimate.com/github/fixique/MetalGlobe/maintainability)
 
