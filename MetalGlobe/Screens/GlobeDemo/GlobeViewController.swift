@@ -76,56 +76,19 @@ final class GlobeViewController: MainSceneViewController {
 
     override func draw() {
         guard let drawable = metalLayer?.nextDrawable(),
-            let drawableSize = metalLayer?.drawableSize,
-            let indexBuffer = indexBuffer,
-            let pipeline = pipeline else { return }
+            let drawableSize = metalLayer?.drawableSize
+            else { return }
 
         let yAxis = Vector4(x: 0, y: -1, z: 0, w: 0)
         var modelViewMatrix = Matrix4x4.rotationAboutAxis(yAxis, byAngle: rotationAngle)
         modelViewMatrix.W.z = -3
-
         let aspect = Float32(drawableSize.width) / Float32(drawableSize.height)
-
         let projectionMatrix = Matrix4x4.perspeciveProjection(aspect, fieldOfViewY: 60, near: 0.1, far: 100.0)
-
         let matrices = [projectionMatrix, modelViewMatrix]
         memcpy(uniformBuffer?.contents(), matrices, Int(MemoryLayout<Matrix4x4>.size * 2))
 
         let commandBuffer = commandQueue?.makeCommandBuffer()
-
-        let passDescriptor = MTLRenderPassDescriptor()
-        passDescriptor.colorAttachments[0].texture = drawable.texture
-        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.05, 0.05, 0.05, 1)
-        passDescriptor.colorAttachments[0].loadAction = .clear
-        passDescriptor.colorAttachments[0].storeAction = .store
-
-        passDescriptor.depthAttachment.texture = depthTexture
-        passDescriptor.depthAttachment.clearDepth = 1
-        passDescriptor.depthAttachment.loadAction = .clear
-        passDescriptor.depthAttachment.storeAction = .dontCare
-
-        let indexCount = indexBuffer.length / MemoryLayout<UInt16>.size
-        let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: passDescriptor)
-        if userToggle {
-            commandEncoder?.setTriangleFillMode(.lines)
-        }
-        commandEncoder?.setRenderPipelineState(pipeline)
-        commandEncoder?.setDepthStencilState(makeDepthStencilState())
-        commandEncoder?.setFrontFacing(.counterClockwise)
-        commandEncoder?.setCullMode(.back)
-        commandEncoder?.setVertexBuffer(vertexBuffer, offset:0, index:0)
-        commandEncoder?.setVertexBuffer(uniformBuffer, offset:0, index:1)
-        commandEncoder?.setFragmentTexture(diffuseTexture, index: 0)
-        commandEncoder?.setFragmentSamplerState(samplerState, index: 0)
-
-        commandEncoder?.drawIndexedPrimitives(type: .triangle,
-                                             indexCount:indexCount,
-                                             indexType:.uint16,
-                                             indexBuffer:indexBuffer,
-                                             indexBufferOffset: 0)
-
-        commandEncoder?.endEncoding()
-
+        configureCommandEncoder(texture: drawable.texture, commandBuffer: commandBuffer)
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
 
@@ -142,26 +105,10 @@ private extension GlobeViewController {
 
         let width = imageRef.width
         let height = imageRef.height
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-
         let rawData = calloc(height * width * 4, MemoryLayout<UInt8>.size)
-
         let bytesPerPixel = 4
         let bytesPerRow = bytesPerPixel * width
-        let bitsPerComponent = 8
-
-        let options = CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
-
-        let context = CGContext(data: rawData,
-                                width: width,
-                                height: height,
-                                bitsPerComponent: bitsPerComponent,
-                                bytesPerRow: bytesPerRow,
-                                space: colorSpace,
-                                bitmapInfo: options)
-
-        context?.draw(imageRef, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
-
+        configureTextureContext(rawData: rawData, imageRef: imageRef, bytesPerRow: bytesPerRow)
         let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba8Unorm,
                                                                          width: Int(width),
                                                                          height: Int(height),
@@ -179,6 +126,63 @@ private extension GlobeViewController {
         free(rawData)
 
         return texture
+    }
+
+    func configureTextureContext(rawData: UnsafeMutableRawPointer?, imageRef: CGImage, bytesPerRow: Int) {
+        let bitsPerComponent = 8
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let options = CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
+
+        let context = CGContext(data: rawData,
+                                width: imageRef.width,
+                                height: imageRef.height,
+                                bitsPerComponent: bitsPerComponent,
+                                bytesPerRow: bytesPerRow,
+                                space: colorSpace,
+                                bitmapInfo: options)
+
+        context?.draw(imageRef, in: CGRect(x: 0, y: 0, width: CGFloat(imageRef.width), height: CGFloat(imageRef.height)))
+    }
+
+    func getRenderPassDescriptor(texture: MTLTexture) -> MTLRenderPassDescriptor {
+        let passDescriptor = MTLRenderPassDescriptor()
+        passDescriptor.colorAttachments[0].texture = texture
+        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.05, 0.05, 0.05, 1)
+        passDescriptor.colorAttachments[0].loadAction = .clear
+        passDescriptor.colorAttachments[0].storeAction = .store
+
+        passDescriptor.depthAttachment.texture = depthTexture
+        passDescriptor.depthAttachment.clearDepth = 1
+        passDescriptor.depthAttachment.loadAction = .clear
+        passDescriptor.depthAttachment.storeAction = .dontCare
+        return passDescriptor
+    }
+
+    func configureCommandEncoder(texture: MTLTexture, commandBuffer: MTLCommandBuffer?) {
+        guard let indexBuffer = indexBuffer, let pipeline = pipeline else { return }
+        let passDescriptor = getRenderPassDescriptor(texture: texture)
+
+        let indexCount = indexBuffer.length / MemoryLayout<UInt16>.size
+        let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: passDescriptor)
+        if userToggle {
+            commandEncoder?.setTriangleFillMode(.lines)
+        }
+        commandEncoder?.setRenderPipelineState(pipeline)
+        commandEncoder?.setDepthStencilState(makeDepthStencilState())
+        commandEncoder?.setFrontFacing(.counterClockwise)
+        commandEncoder?.setCullMode(.back)
+        commandEncoder?.setVertexBuffer(vertexBuffer, offset:0, index:0)
+        commandEncoder?.setVertexBuffer(uniformBuffer, offset:0, index:1)
+        commandEncoder?.setFragmentTexture(diffuseTexture, index: 0)
+        commandEncoder?.setFragmentSamplerState(samplerState, index: 0)
+
+        commandEncoder?.drawIndexedPrimitives(type: .triangle,
+                                              indexCount:indexCount,
+                                              indexType:.uint16,
+                                              indexBuffer:indexBuffer,
+                                              indexBufferOffset: 0)
+
+        commandEncoder?.endEncoding()
     }
 
     func makeSemplerDescriptor() {
