@@ -6,6 +6,6 @@
 
 # MetalGlobe 
 
-A simple demo project. Inside you will find some interesting code for metal. As a demo, a sphere was generated. The second option is a sphere with a texture.
+A simple demo project. Inside you will find some interesting code for metal. As a demo, a sphere was generated. The second option is a sphere with a texture. Feel free to use code!)
 
 ![Demo gif](demo.gif)
