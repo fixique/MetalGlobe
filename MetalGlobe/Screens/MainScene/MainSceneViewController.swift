@@ -116,7 +116,7 @@ private extension MainSceneViewController {
 
     func startDisplayTimer() {
         timer = CADisplayLink(target: self, selector: #selector(redraw))
-        timer?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+        timer?.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
     }
 
 }
