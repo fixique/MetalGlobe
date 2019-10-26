@@ -30,7 +30,7 @@ struct Uniforms
     float4x4 modelViewMatrix;
 };
 
-vertex TexturedColoredOutVertex vertex_globe(device TexturedInVertex *vert [[buffer(0)]],
+vertex TexturedColoredOutVertex vertex_globe(const device TexturedInVertex *vert [[buffer(0)]],
                                                   constant Uniforms &uniforms [[buffer(1)]],
                                                   uint vid [[vertex_id]])
 {
